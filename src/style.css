@@ -9,15 +9,32 @@ header {
 #grid-container {
   height: 100vh;
   display: grid;
-  grid-template: 40px 1fr / 300px 1fr;
+  grid-template: 40px 1fr / clamp(150px, 15%, 300px) 1fr;
 }
 .grid-content {
   padding: 2%;
   grid-area: 2 / 2 / 3 / 3;
 }
+.grid-sidebar {
+  background-color: #222222;
+}
 .grid-sidebar .sidebar-projectList {
+  padding-left: 0;
+  padding-top: 30%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
   list-style-type: none;
 }
 .grid-sidebar .sidebar-projectList li {
   margin-block: 10px;
+  font-size: 1.15rem;
+}
+.grid-sidebar .sidebar-projectList li:hover {
+  cursor: pointer;
+  transition-property: transform;
+  transition-duration: 200ms;
+  transform: scale(1.1);
 }

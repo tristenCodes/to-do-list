@@ -1,12 +1,10 @@
 const project = (name) => {
-  // create a project
 
   // properties
   const projectName = name
   const taskList = [] // all tasks in this project will be stored here
 
   // functions
-
   const getProjectName = () => {
     return projectName
   }
@@ -29,7 +27,7 @@ const project = (name) => {
     getProjectName,
     getTaskList,
     addToTaskList,
-    removeFromTaskList
+    removeFromTaskList,
   }
 }
 
