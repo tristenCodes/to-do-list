@@ -13,8 +13,13 @@ const project = (name) => {
     return taskList
   }
 
-  const addToTaskList = (taskObj) => {
-    taskList.push(taskObj)
+  const addToTaskList = (...taskObj) => {
+
+    taskObj.forEach((elem) => {
+      taskList.push(elem)
+    })
+
+    
   }
 
   const removeFromTaskList = (taskObj) => {

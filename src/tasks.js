@@ -1,30 +1,35 @@
-const task = () => {
+import { format } from 'date-fns'
+
+const task = (taskName, taskDescription, status, dueDate, priority) => {
   // properties
-  let taskName = ''
-  let taskDescription = ''
-  let status
-  let dueDate
-  let priority
-  let notes
+  // let taskName = ''
+  // let taskDescription = ''
+  // let status
+  // let dueDate
+  // let priority
+  // let notes
 
   return {
     set name(value) {
       taskName = value
     },
+
     get name() {
       return taskName
     },
 
-    set taskDescription(value) {
+    set description(value) {
       taskDescription = value
     },
-    get taskDescription() {
+
+    get description() {
       return taskDescription
     },
 
     set status(value) {
       status = value
     },
+
     get status() {
       return status
     },
@@ -32,22 +37,17 @@ const task = () => {
     set dueDate(value) {
       dueDate = value
     },
+
     get dueDate() {
-      return dueDate
+      return format(dueDate, 'P')
     },
 
     set priority(value) {
       priority = value
     },
+
     get priority() {
       return priority
-    },
-
-    set notes(value) {
-      notes = value
-    },
-    get notes() {
-      return notes
     },
   }
 }
