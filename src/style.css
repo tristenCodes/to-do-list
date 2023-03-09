@@ -1,5 +1,7 @@
 body {
   margin: 0;
+  background: black;
+  color: white;
 }
 ul {
   list-style-type: none;
@@ -39,33 +41,102 @@ footer #new-task:hover {
   color: #76e976;
   text-decoration: line-through;
 }
+.task-form-container {
+  display: none;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  margin: auto;
+  height: 50%;
+  width: 35%;
+}
+.task-form-container .task-form {
+  display: grid;
+  grid-template: 2fr 200px 2fr 1fr / 1fr 1fr;
+  gap: 1rem;
+  background-color: #2f2f2f;
+  text-align: center;
+  border-radius: 18px;
+}
+.task-form-container .task-form input {
+  background-color: #1c1c1c;
+  color: white;
+  outline: none;
+  border: none;
+  min-height: 2rem;
+  min-width: 240px;
+  text-align: center;
+}
+.task-form-container .task-form textarea {
+  background-color: #1c1c1c;
+  color: white;
+  outline: none;
+  border: none;
+  min-height: 2rem;
+  min-width: 240px;
+}
+.task-form-container .task-form h2 {
+  font-size: 2.4rem;
+  grid-row: 1;
+  grid-column-start: 1;
+  grid-column-end: 3;
+  justify-self: center;
+  align-self: center;
+}
+.task-form-container .task-form > div label {
+  display: block;
+  margin-bottom: 1rem;
+}
+.task-form-container .task-form > * {
+  align-self: flex-start;
+  justify-self: center;
+}
+.task-form-container .task-form .task-submit-div {
+  align-self: center;
+  grid-column-start: 1;
+  grid-column-end: 3;
+}
+.task-form-container .task-form select {
+  background-color: #1c1c1c;
+  color: white;
+  outline: none;
+  border: none;
+  padding-block: 0.5rem;
+  min-width: 240px;
+  text-align: center;
+}
+.task-form-container .task-form button {
+  background-color: #1c1c1c;
+  color: white;
+  outline: none;
+  border: none;
+  padding-inline: 20px;
+  padding-block: 10px;
+  margin-bottom: 25px;
+}
 .grid-content {
   grid-area: 2 / 2 / 3 / 3;
 }
-.grid-content .task-table-container #task-table {
-  background-color: #202020;
-  width: 95%;
-  margin: auto;
+.grid-content .task-container {
+  width: 90%;
+  margin-inline: 2rem;
 }
-.grid-content .task-table-container #task-table colgroup .completed-col {
-  width: 7.5%;
+.grid-content .task-container .task-div {
+  display: flex;
+  justify-content: space-between;
+  background-color: #272727;
+  padding: 20px;
+  margin-block: 5px;
 }
-.grid-content .task-table-container #task-table colgroup .due-col {
-  width: 7.5%;
+.grid-content .task-container .task-div .task-left {
+  display: flex;
+  gap: 1.5rem;
 }
-.grid-content .task-table-container #task-table colgroup .priorty-col {
-  width: 7.5%;
-}
-.grid-content .task-table-container #task-table th {
-  padding-block: 1%;
-  text-align: center;
-}
-.grid-content .task-table-container #task-table tr + tr {
-  height: 6vh;
-}
-.grid-content .task-table-container #task-table td {
-  text-align: center;
-  font-size: 1.2rem;
+.grid-content .task-container .task-div .task-right {
+  display: flex;
+  gap: 1.5rem;
 }
 .grid-sidebar {
   background-color: #222222;

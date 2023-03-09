@@ -6,10 +6,15 @@ const displayController = () => {
   const sideBar = document.querySelector('.sidebar-projectList')
   let projectListItem = document.querySelectorAll('.sidebar__project')
   const projectTitle = document.querySelector('#projectTitle')
-  const tableBody = document.querySelector('tbody')
+  const taskContainer = document.querySelector('.task-container')
+  let taskFormContainer
   const newTask = document.querySelector('#new-task')
-
+  
   // functions
+  const setProjectTitle = (value) => {
+    projectTitle.textContent = value
+  }
+  
   const addToSideBar = (project) => {
     // create list element and append to sidebar
     let listItem = document.createElement('li')
@@ -19,27 +24,15 @@ const displayController = () => {
     listItem.addEventListener('click', () => {
       setProjectTitle(listItem.innerText)
       loadTasks(project)
+      getProjectItems()
     })
 
     sideBar.appendChild(listItem)
   }
 
-  const createTableHeader = () => {
-    const header = `
-    <tr>
-      <th> </th>
-      <th>Task</th>
-      <th>Due Date</th>
-      <th>Priority</th>
-    </tr>
-    `
-    tableBody.innerHTML = header
-  }
-
   const loadTasks = (project) => {
+    taskContainer.innerHTML = ''
     let taskList = project.getTaskList()
-
-    createTableHeader()
 
     taskList.forEach((element) => {
       populateTaskHTMLData(element)
@@ -52,12 +45,14 @@ const displayController = () => {
   }
 
   const populateTaskHTMLData = (task) => {
-    let tr = document.createElement('tr')
-    tr.classList.add('table-data')
+    let taskDiv = document.createElement('div')
+    let taskLeft = document.createElement('div')
+    let taskRight = document.createElement('div')
 
-    
+    taskLeft.classList.add('task-left')
+    taskRight.classList.add('task-right')
+    taskDiv.classList.add('task-div')
 
-    let tdInputCheckbox = document.createElement('td')
     let inputCheckBox = document.createElement('input')
     inputCheckBox.setAttribute('type', 'checkbox')
 
@@ -65,43 +60,46 @@ const displayController = () => {
       // event listener for checkbox to adjust task status
       if (inputCheckBox.checked) {
         task.status = 'complete'
-        tr.classList.add('complete')
+        taskDiv.classList.add('complete')
       } else if (!inputCheckBox.checked) {
         task.status = 'incomplete'
-        if (tr.classList.contains('complete')) {
-          tr.classList.remove('complete')
+        if (taskDiv.classList.contains('complete')) {
+          taskDiv.classList.remove('complete')
         }
       }
       console.log(`Task: ${task.name}, Status: ${task.status}`)
     })
 
-    tdInputCheckbox.appendChild(inputCheckBox)
-
-    tr.appendChild(tdInputCheckbox)
-
-    let tdTaskName = document.createElement('td')
-    tdTaskName.textContent = task.name
-    tr.appendChild(tdTaskName)
-
-    let tdTaskDueDate = document.createElement('td')
-    tdTaskDueDate.textContent = task.dueDate
-    tr.appendChild(tdTaskDueDate)
-
-    let tdTaskPriority = document.createElement('td')
-    tdTaskPriority.textContent = task.priority
-    tr.appendChild(tdTaskPriority)
+    const taskName = document.createElement('div')
+    taskName.textContent = task.name
 
     if (task.status === 'complete') {
-      tr.classList.add('complete')
-      inputCheckBox.checked = true;
+      taskDiv.classList.add('complete')
+      inputCheckBox.checked = true
     }
 
-    tableBody.appendChild(tr)
+    const dueDate = document.createElement('div')
+    dueDate.textContent = task.dueDate
+
+    const priority = document.createElement('div')
+    priority.textContent = `Priority: ${task.priority}`
+
+    taskLeft.appendChild(inputCheckBox)
+    taskLeft.appendChild(taskName)
+    taskRight.appendChild(dueDate)
+    taskRight.appendChild(priority)
+
+    taskDiv.appendChild(taskLeft)
+    taskDiv.appendChild(taskRight)
+
+    taskContainer.appendChild(taskDiv)
   }
 
-  const setProjectTitle = (value) => {
-    projectTitle.textContent = value
-  }
+  newTask.addEventListener('click', () => {
+    taskFormContainer = document.querySelector('.task-form-container')
+    taskFormContainer.style.display ='block'
+  })
+
 
   return {
     addToSideBar,

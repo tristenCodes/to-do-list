@@ -9,38 +9,53 @@
     <title>To Do List</title>
   </head>
   <body>
+
+    <div class="task-form-container">
+      <form class='task-form'>
+
+        <h2>Create a Task</h2>
+
+        <div class="task-name-div">
+          <label for="task-name">Task Name</label>
+          <input type="text" name="task-name" id="task-name">
+        </div>
+
+        <div class="task-description-div">
+          <label for="task-description">Task Description</label>
+          <textarea name="task-description" id="task-description" cols="30" rows="5"></textarea>
+        </div>
+
+        <div class="task-duedate-div">
+          <label for="task-duedate">Due Date</label>
+          <input type="date" name="task-duedate" id="task-duedate">
+        </div>
+
+        <div class="task-priority-div">
+          <label for="task-priority">Priority</label>
+          <select name="task-priority" id="task-priority">
+            <option value="High">High</option>
+            <option value="Medium">Medium</option>
+            <option value="Low">Low</option>
+            <option value="None">None</option>
+
+          </select>
+        </div>
+
+        <div class="task-submit-div">
+          <button>Submit</button>
+        </div>
+
+      </form>
+    </div>
+
     <div id="grid-container">
       <header>icons will go here</header>
 
       <div class="grid-content">
         <h1 id="projectTitle">Null</h1>
-        <div class="task-table-container">
+        <div class="task-container">
 
-          <!-- test tasks to get styling right -->
-          <table id='task-table'>
-            
-            <colgroup>
-              <col class="completed-col">
-              <col class="task-col">
-              <col class="due-col">
-              <col class="priorty-col">
-            </colgroup>
-
-            <tr>
-              <th> </th>
-              <th>Task</th>
-              <th>Due Date</th>
-              <th>Priority</th>
-            </tr>
-
-            <!-- <tr>
-              <td><input type="checkbox"></td>
-              <td>This is a task name asdf asdf asdf assdf asdf asdf asdf asdf asdf asdf asdf asdf df asdf </td>
-              <td>Due</td>
-              <td>1</td>
-            </tr> -->
-
-          </table>
+          
 
         </div>
         <footer>
