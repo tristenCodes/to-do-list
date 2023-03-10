@@ -18,8 +18,6 @@ const project = (name) => {
     taskObj.forEach((elem) => {
       taskList.push(elem)
     })
-
-    
   }
 
   const removeFromTaskList = (taskObj) => {

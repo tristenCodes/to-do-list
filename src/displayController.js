@@ -1,5 +1,6 @@
 import project from './projects'
 import task from './tasks'
+const { add, format } = require('date-fns')
 
 const displayController = () => {
   //properties
@@ -9,6 +10,10 @@ const displayController = () => {
   const taskContainer = document.querySelector('.task-container')
   let taskFormContainer
   const newTask = document.querySelector('#new-task')
+  let currentProject
+  let taskForm = document.querySelector('.task-form')
+  const submit = document.querySelector('#submit')
+  const createProject = document.querySelector('#new-project')
   
   // functions
   const setProjectTitle = (value) => {
@@ -22,9 +27,10 @@ const displayController = () => {
     listItem.textContent = `${project.getProjectName()}`
 
     listItem.addEventListener('click', () => {
+      currentProject = project
       setProjectTitle(listItem.innerText)
       loadTasks(project)
-      getProjectItems()
+      getProjectItems()  
     })
 
     sideBar.appendChild(listItem)
@@ -100,12 +106,53 @@ const displayController = () => {
     taskFormContainer.style.display ='block'
   })
 
+  submit.addEventListener('click', () => {
+
+      event.preventDefault()
+
+      try {
+
+      let taskName = document.getElementById('task-name').value
+
+      // add day function is to fix the timeone offset I was encountering, 
+      // causing the selected date to be a day behind
+      let taskDueDate = add(new Date(document.getElementById('task-duedate').value), {days: 1}) 
+      if (taskDueDate == 'Invalid Date') {
+        taskDueDate = new Date()
+      }
+      
+      
+      console.log(taskDueDate)
+      
+      let taskDescription = document.getElementById('task-description').value
+      let taskPriority = document.getElementById('task-priority').value
+
+
+
+      currentProject.addToTaskList(task(`${taskName}`, `${taskDescription}`, `incomplete`, format(taskDueDate, 'P'), `${taskPriority}`))
+      loadTasks(currentProject)
+      taskFormContainer.style.display ='none'
+      taskForm.reset()
+      } catch (error) {
+        console.log(error)
+      }
+
+  })
+
+  createProject.addEventListener('click', () => {
+    let newProjName = prompt('enter a new project name')
+    const newProj = project(newProjName)
+    addToSideBar(newProj)
+  })
+
+
+
 
   return {
     addToSideBar,
     setProjectTitle,
     getProjectItems,
-    populateTaskData: populateTaskHTMLData,
+    populateTaskHTMLData,
     loadTasks,
   }
 }

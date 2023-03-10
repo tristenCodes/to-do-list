@@ -54,7 +54,7 @@ footer #new-task:hover {
 }
 .task-form-container .task-form {
   display: grid;
-  grid-template: 2fr 200px 2fr 1fr / 1fr 1fr;
+  grid-template: 2fr 2fr 200px fr 1fr / 1fr 1fr;
   gap: 1rem;
   background-color: #2f2f2f;
   text-align: center;
@@ -74,8 +74,10 @@ footer #new-task:hover {
   color: white;
   outline: none;
   border: none;
-  min-height: 2rem;
-  min-width: 240px;
+  height: 1.8rem;
+  max-height: 4rem;
+  width: 240px;
+  max-width: 240px;
 }
 .task-form-container .task-form h2 {
   font-size: 2.4rem;
@@ -140,6 +142,7 @@ footer #new-task:hover {
 }
 .grid-sidebar {
   background-color: #222222;
+  font-size: 1.15rem;
 }
 .grid-sidebar .project-options {
   border-top: 3px solid white;
@@ -167,7 +170,6 @@ footer #new-task:hover {
 }
 .grid-sidebar .sidebar-projectList li {
   margin-block: 10px;
-  font-size: 1.15rem;
 }
 .grid-sidebar .sidebar-projectList li:hover {
   cursor: pointer;

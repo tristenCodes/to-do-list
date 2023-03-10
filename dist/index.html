@@ -17,17 +17,18 @@
 
         <div class="task-name-div">
           <label for="task-name">Task Name</label>
-          <input type="text" name="task-name" id="task-name">
+          <input type="text" name="task-name" id="task-name" required>
         </div>
 
-        <div class="task-description-div">
-          <label for="task-description">Task Description</label>
-          <textarea name="task-description" id="task-description" cols="30" rows="5"></textarea>
-        </div>
-
+        
         <div class="task-duedate-div">
           <label for="task-duedate">Due Date</label>
-          <input type="date" name="task-duedate" id="task-duedate">
+          <input type="date" name="task-duedate" id="task-duedate" required>
+        </div>
+        
+        <div class="task-description-div">
+          <label for="task-description">Task Description</label>
+          <textarea name="task-description" id="task-description" cols="30" rows="5" required></textarea>
         </div>
 
         <div class="task-priority-div">
@@ -37,12 +38,11 @@
             <option value="Medium">Medium</option>
             <option value="Low">Low</option>
             <option value="None">None</option>
-
           </select>
         </div>
 
         <div class="task-submit-div">
-          <button>Submit</button>
+          <button id='submit'>Submit</button>
         </div>
 
       </form>
@@ -66,7 +66,7 @@
       <div class="grid-sidebar">
         <ul class="sidebar-projectList"></ul>
         <div class="project-options">
-          <span id="new-project">New Project</span>
+          <span id="new-project">Create Project</span>
         </div>
       </div>
     </div>
