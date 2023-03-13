@@ -140,9 +140,6 @@ footer #new-task:hover {
   display: flex;
   gap: 1.5rem;
 }
-.grid-content .task-container .task-div .task-right div:nth-child(2) {
-  margin-left: 10px;
-}
 .grid-sidebar {
   background-color: #222222;
   font-size: 1.15rem;
