@@ -3156,7 +3156,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
   \**********************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _projects_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./projects.js */ \"./src/projects.js\");\n/* harmony import */ var _displayController_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./displayController.js */ \"./src/displayController.js\");\n/* harmony import */ var _tasks_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./tasks.js */ \"./src/tasks.js\");\n\n\n\n\nconst displayController = (0,_displayController_js__WEBPACK_IMPORTED_MODULE_1__[\"default\"])()\nconst inbox = (0,_projects_js__WEBPACK_IMPORTED_MODULE_0__[\"default\"])('Inbox')\n\ninbox.addToTaskList((0,_tasks_js__WEBPACK_IMPORTED_MODULE_2__[\"default\"])('whatever', 'who cares', 'incomplete', new Date(), 'low'))\n\n\ndisplayController.addToSideBar(inbox)\ndisplayController.setProjectTitle(inbox.getProjectName())\ndisplayController.loadTasks(inbox)\ndisplayController.getProjectItems()\n\n// for local storage to work, every project needs to be saved to a projectList whenever created\n\n\n// ----------------------------------------------------\n\n//# sourceURL=webpack://to-do-list/./src/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _projects_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./projects.js */ \"./src/projects.js\");\n/* harmony import */ var _displayController_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./displayController.js */ \"./src/displayController.js\");\n/* harmony import */ var _tasks_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./tasks.js */ \"./src/tasks.js\");\n/* harmony import */ var _storage__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./storage */ \"./src/storage.js\");\n\n\n\n\n\n\nconst displayController = (0,_displayController_js__WEBPACK_IMPORTED_MODULE_1__[\"default\"])()\nconst inbox = (0,_projects_js__WEBPACK_IMPORTED_MODULE_0__[\"default\"])('Inbox')\n\ninbox.addToTaskList((0,_tasks_js__WEBPACK_IMPORTED_MODULE_2__[\"default\"])('whatever', 'who cares', 'incomplete', new Date(), 'low'))\n\ndisplayController.addToSideBar(inbox)\ndisplayController.setProjectTitle(inbox.getProjectName())\ndisplayController.loadTasks(inbox)\ndisplayController.getProjectItems()\n\n// for local storage to work, every project needs to be saved to a projectList whenever created\n\n\n// ----------------------------------------------------\n\n//# sourceURL=webpack://to-do-list/./src/index.js?");
 
 /***/ }),
 
@@ -3167,6 +3167,16 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _pro
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\nconst project = (name) => {\n\n  // properties\n  const projectName = name\n  const taskList = [] // all tasks in this project will be stored here\n\n  // functions\n  const getProjectName = () => {\n    return projectName\n  }\n\n  const getTaskList = () => {\n    return taskList\n  }\n\n  const addToTaskList = (...taskObj) => {\n\n    taskObj.forEach((elem) => {\n      taskList.push(elem)\n    })\n  }\n\n  const removeFromTaskList = (taskObj) => {\n    if (taskList.indexOf(taskObj) !== undefined) {\n      taskList.splice(taskList.indexOf, 1)\n    }\n  }\n\n  return {\n    getProjectName,\n    getTaskList,\n    addToTaskList,\n    removeFromTaskList,\n  }\n}\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (project);\n\n\n//# sourceURL=webpack://to-do-list/./src/projects.js?");
+
+/***/ }),
+
+/***/ "./src/storage.js":
+/*!************************!*\
+  !*** ./src/storage.js ***!
+  \************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\nfunction storage() {\n    const listOfProjects = []\n\n    const getListOfProjects = () => {\n        return listOfProjects\n    }\n\n    function addToListOfProjects(value) {\n        listOfProjects.push(value)\n    }\n\n    function populateStorage() {\n        localStorage.getItem('projects')\n    }\n\n    function saveToStorage() {\n        localStorage.setItem('projects', getListOfProjects())\n    }\n}\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (storage);\n\n//# sourceURL=webpack://to-do-list/./src/storage.js?");
 
 /***/ }),
 
