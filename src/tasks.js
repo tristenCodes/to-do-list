@@ -1,6 +1,6 @@
 import { format } from 'date-fns'
 
-const task = (taskName, taskDescription, status, dueDate, priority) => {
+const task = (taskName = 'none', taskDescription = 'none', status = 'incomplete', dueDate = new Date(), priority = 'None') => {
 
   return {
     set name(value) {

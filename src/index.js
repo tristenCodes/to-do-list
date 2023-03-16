@@ -1,20 +1,35 @@
 import Projects from './projects.js'
 import Display from './displayController.js'
 import task from './tasks.js'
-import { populateStorage } from './storage'
-
+import { format } from 'date-fns'
+import { getStorage, addToStorage } from './storage.js'
 
 const displayController = Display()
+
 const inbox = Projects('Inbox')
+inbox.addToTaskList(task('Welcome to the inbox', 'this is a test description', 'incomplete', format(new Date(), 'P'), 'High'))
+addToStorage(inbox)
+// -------------------------------------------------------------------------------------
+const testArray = []                // create a new array
 
-inbox.addToTaskList(task('whatever', 'who cares', 'incomplete', new Date(), 'low'))
+testArray.push(inbox)               // push objects in to the new array
 
-displayController.addToSideBar(inbox)
-displayController.setProjectTitle(inbox.getProjectName())
-displayController.loadTasks(inbox)
-displayController.getProjectItems()
+const newTestArray = JSON.stringify(testArray)          // create a new obj = JSON.stringify of the array
 
-// for local storage to work, every project needs to be saved to a projectList whenever created
+localStorage.setItem('testArray', newTestArray)         // set local storage to array
+
+console.log(JSON.parse(localStorage.getItem('testArray')))      // we still need to add the project functions to objects
+                                                                // this must be done after local storage is loaded
 
 
-// ----------------------------------------------------
+// -------------------------------------------------------------------------------------
+
+const projectStorage = getStorage()
+
+projectStorage.forEach((proj) => {
+    displayController.addToSideBar(proj)
+    displayController.setProjectTitle(proj.getProjectName())
+    displayController.loadTasks(proj)
+})
+
+

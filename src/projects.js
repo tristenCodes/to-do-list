@@ -1,7 +1,7 @@
-const project = (name) => {
-
+const project = (name = '') => {
   // properties
-  const projectName = name
+  let projectName = name
+
   const taskList = [] // all tasks in this project will be stored here
 
   // functions
@@ -9,12 +9,15 @@ const project = (name) => {
     return projectName
   }
 
+  const setProjectName = (value) => {
+    projectName = value
+  }
+
   const getTaskList = () => {
     return taskList
   }
 
   const addToTaskList = (...taskObj) => {
-
     taskObj.forEach((elem) => {
       taskList.push(elem)
     })
@@ -28,10 +31,14 @@ const project = (name) => {
 
   return {
     getProjectName,
+    setProjectName,
     getTaskList,
     addToTaskList,
     removeFromTaskList,
+    projectName,
+    taskList
   }
 }
+
 
 export default project

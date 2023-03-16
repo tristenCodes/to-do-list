@@ -1,4 +1,5 @@
 import project from './projects'
+import { addToStorage } from './storage'
 import task from './tasks'
 const { add, format } = require('date-fns')
 
@@ -19,20 +20,27 @@ const displayController = () => {
   const setProjectTitle = (value) => {
     projectTitle.textContent = value
   }
-  
+
   const addToSideBar = (project) => {
     // create list element and append to sidebar
     let listItem = document.createElement('li')
     listItem.classList.add('sidebar__project')
     listItem.textContent = `${project.getProjectName()}`
+    addToStorage(project)
+    console.log(project)
 
     listItem.addEventListener('click', () => {
       currentProject = project
       setProjectTitle(listItem.innerText)
-      loadTasks(project)
-      getProjectItems()  
-    })
 
+      if (project.getTaskList().length !== 0){
+        loadTasks(project)
+      }
+      else {
+        taskContainer.innerHTML = ''
+      }
+
+    })
     sideBar.appendChild(listItem)
   }
 
@@ -40,9 +48,16 @@ const displayController = () => {
     taskContainer.innerHTML = ''
     let taskList = project.getTaskList()
 
-    taskList.forEach((element) => {
-      populateTaskHTMLData(element)
-    })
+
+      let [tasks] = taskList
+      if (Array.isArray(tasks)){
+        tasks.forEach((element) => {
+          populateTaskHTMLData(element)
+        })
+      }
+      else {
+        populateTaskHTMLData(tasks)
+      }
   }
 
   const getProjectItems = () => {
@@ -55,9 +70,12 @@ const displayController = () => {
     let taskLeft = document.createElement('div')
     let taskRight = document.createElement('div')
 
+
+
     taskLeft.classList.add('task-left')
     taskRight.classList.add('task-right')
     taskDiv.classList.add('task-div')
+    taskDiv.classList.add('tool-tip')
 
     let inputCheckBox = document.createElement('input')
     inputCheckBox.setAttribute('type', 'checkbox')
@@ -73,7 +91,6 @@ const displayController = () => {
           taskDiv.classList.remove('complete')
         }
       }
-      console.log(`Task: ${task.name}, Status: ${task.status}`)
     })
 
     const taskName = document.createElement('div')
@@ -122,7 +139,6 @@ const displayController = () => {
       }
       
       
-      console.log(taskDueDate)
       
       let taskDescription = document.getElementById('task-description').value
       let taskPriority = document.getElementById('task-priority').value
@@ -141,8 +157,15 @@ const displayController = () => {
 
   createProject.addEventListener('click', () => {
     let newProjName = prompt('enter a new project name')
-    const newProj = project(newProjName)
-    addToSideBar(newProj)
+    if (newProjName === null || newProjName === undefined || newProjName === '') {
+      alert('invalid name entry')
+      newProjName = 'invalid'
+    }
+    else {
+      const newProj = project(newProjName)
+      addToSideBar(newProj)
+    }
+    
   })
 
 
@@ -153,7 +176,7 @@ const displayController = () => {
     setProjectTitle,
     getProjectItems,
     populateTaskHTMLData,
-    loadTasks,
+    loadTasks
   }
 }
 
