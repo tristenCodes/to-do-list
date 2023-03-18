@@ -5,13 +5,6 @@ const project = (name = '') => {
   const taskList = [] // all tasks in this project will be stored here
 
   // functions
-  const getProjectName = () => {
-    return projectName
-  }
-
-  const setProjectName = (value) => {
-    projectName = value
-  }
 
   const getTaskList = () => {
     return taskList
@@ -30,8 +23,13 @@ const project = (name = '') => {
   }
 
   return {
-    getProjectName,
-    setProjectName,
+    set projectName(val) {
+      projectName = val
+    },
+    get projectName() {
+      return projectName
+    },
+    projectName,
     getTaskList,
     addToTaskList,
     removeFromTaskList,

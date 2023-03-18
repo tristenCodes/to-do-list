@@ -1,5 +1,5 @@
 import project from './projects'
-import { addToStorage } from './storage'
+import { addToStorage, storage } from './storage'
 import task from './tasks'
 const { add, format } = require('date-fns')
 
@@ -15,7 +15,7 @@ const displayController = () => {
   let taskForm = document.querySelector('.task-form')
   const submit = document.querySelector('#submit')
   const createProject = document.querySelector('#new-project')
-  
+
   // functions
   const setProjectTitle = (value) => {
     projectTitle.textContent = value
@@ -25,39 +25,41 @@ const displayController = () => {
     // create list element and append to sidebar
     let listItem = document.createElement('li')
     listItem.classList.add('sidebar__project')
-    listItem.textContent = `${project.getProjectName()}`
+    listItem.textContent = `${project.projectName}`
+
     addToStorage(project)
-    console.log(project)
 
     listItem.addEventListener('click', () => {
       currentProject = project
       setProjectTitle(listItem.innerText)
 
-      if (project.getTaskList().length !== 0){
+      if (project.taskList.length !== 0) {
         loadTasks(project)
-      }
-      else {
+      } else {
         taskContainer.innerHTML = ''
       }
-
     })
     sideBar.appendChild(listItem)
   }
 
   const loadTasks = (project) => {
     taskContainer.innerHTML = ''
-    let taskList = project.getTaskList()
+    let taskList = project.taskList
 
+    
 
-      let [tasks] = taskList
-      if (Array.isArray(tasks)){
-        tasks.forEach((element) => {
+    if (project.taskList.length !== 0) {
+      console.log('tasks')
+      console.log(taskList)
+      if (Array.isArray(taskList)) {
+        taskList.forEach((element) => {
           populateTaskHTMLData(element)
+          console.log(element)
         })
+      } else {
+        populateTaskHTMLData(taskList)
       }
-      else {
-        populateTaskHTMLData(tasks)
-      }
+    }
   }
 
   const getProjectItems = () => {
@@ -69,8 +71,6 @@ const displayController = () => {
     let taskDiv = document.createElement('div')
     let taskLeft = document.createElement('div')
     let taskRight = document.createElement('div')
-
-
 
     taskLeft.classList.add('task-left')
     taskRight.classList.add('task-right')
@@ -91,6 +91,7 @@ const displayController = () => {
           taskDiv.classList.remove('complete')
         }
       }
+      localStorage.setItem('storage', JSON.stringify(storage))
     })
 
     const taskName = document.createElement('div')
@@ -120,63 +121,67 @@ const displayController = () => {
 
   newTask.addEventListener('click', () => {
     taskFormContainer = document.querySelector('.task-form-container')
-    taskFormContainer.style.display ='block'
+    taskFormContainer.style.display = 'block'
   })
 
   submit.addEventListener('click', () => {
+    event.preventDefault()
 
-      event.preventDefault()
-
-      try {
-
+    try {
       let taskName = document.getElementById('task-name').value
 
-      // add day function is to fix the timeone offset I was encountering, 
+      // add day function is to fix the timeone offset I was encountering,
       // causing the selected date to be a day behind
-      let taskDueDate = add(new Date(document.getElementById('task-duedate').value), {days: 1}) 
+      let taskDueDate = add(
+        new Date(document.getElementById('task-duedate').value),
+        { days: 1 }
+      )
       if (taskDueDate == 'Invalid Date') {
         taskDueDate = new Date()
       }
-      
-      
-      
+
       let taskDescription = document.getElementById('task-description').value
       let taskPriority = document.getElementById('task-priority').value
 
-
-
-      currentProject.addToTaskList(task(`${taskName}`, `${taskDescription}`, `incomplete`, format(taskDueDate, 'P'), `${taskPriority}`))
+      let newCurrentTask = task(
+        `${taskName}`,
+        `${taskDescription}`,
+        `incomplete`,
+        format(taskDueDate, 'P'),
+        `${taskPriority}`
+      )
+      currentProject.taskList.push(newCurrentTask)
+      // console.log(currentProject.taskList)
       loadTasks(currentProject)
-      taskFormContainer.style.display ='none'
+      localStorage.setItem('storage', JSON.stringify(storage))
+      taskFormContainer.style.display = 'none'
       taskForm.reset()
-      } catch (error) {
-        console.log(error)
-      }
-
+    } catch (error) {
+      console.log(error)
+    }
   })
 
   createProject.addEventListener('click', () => {
     let newProjName = prompt('enter a new project name')
-    if (newProjName === null || newProjName === undefined || newProjName === '') {
+    if (
+      newProjName === null ||
+      newProjName === undefined ||
+      newProjName === ''
+    ) {
       alert('invalid name entry')
       newProjName = 'invalid'
-    }
-    else {
+    } else {
       const newProj = project(newProjName)
       addToSideBar(newProj)
     }
-    
   })
-
-
-
 
   return {
     addToSideBar,
     setProjectTitle,
     getProjectItems,
     populateTaskHTMLData,
-    loadTasks
+    loadTasks,
   }
 }
 

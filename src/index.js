@@ -7,29 +7,14 @@ import { getStorage, addToStorage } from './storage.js'
 const displayController = Display()
 
 const inbox = Projects('Inbox')
+let projectStorage = JSON.parse(localStorage.getItem('storage'))
 inbox.addToTaskList(task('Welcome to the inbox', 'this is a test description', 'incomplete', format(new Date(), 'P'), 'High'))
-addToStorage(inbox)
-// -------------------------------------------------------------------------------------
-const testArray = []                // create a new array
-
-testArray.push(inbox)               // push objects in to the new array
-
-const newTestArray = JSON.stringify(testArray)          // create a new obj = JSON.stringify of the array
-
-localStorage.setItem('testArray', newTestArray)         // set local storage to array
-
-console.log(JSON.parse(localStorage.getItem('testArray')))      // we still need to add the project functions to objects
-                                                                // this must be done after local storage is loaded
 
 
-// -------------------------------------------------------------------------------------
 
-const projectStorage = getStorage()
 
 projectStorage.forEach((proj) => {
     displayController.addToSideBar(proj)
-    displayController.setProjectTitle(proj.getProjectName())
+    displayController.setProjectTitle(proj.projectName)
     displayController.loadTasks(proj)
 })
-
-
