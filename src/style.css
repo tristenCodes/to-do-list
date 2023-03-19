@@ -70,8 +70,8 @@ footer #new-task:hover {
   grid-template: 40px 1fr / clamp(150px, 15%, 300px) 1fr;
 }
 .complete {
-  color: #76e976;
   text-decoration: line-through;
+  text-decoration-style: 3px solid red;
 }
 .task-form-container {
   display: none;
@@ -165,6 +165,7 @@ footer #new-task:hover {
   background-color: #272727;
   padding: 20px;
   margin-block: 5px;
+  align-items: center;
 }
 .grid-content .task-container .task-div .task-left {
   display: flex;
@@ -176,6 +177,7 @@ footer #new-task:hover {
 .grid-content .task-container .task-div .task-right {
   display: flex;
   gap: 1.5rem;
+  align-items: center;
 }
 .grid-content .task-container .task-div .task-right div:nth-child(2) {
   margin-left: 10px;

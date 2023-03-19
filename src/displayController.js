@@ -16,6 +16,7 @@ const displayController = () => {
   const submit = document.querySelector('#submit')
   const createProject = document.querySelector('#new-project')
   const exitTask = document.getElementById('exit_task')
+  const trashCan = document.querySelectorAll('exit_task')
 
   // functions
   const setProjectTitle = (value) => {
@@ -47,8 +48,6 @@ const displayController = () => {
     taskContainer.innerHTML = ''
     let taskList = project.taskList
 
-    
-
     if (project.taskList.length !== 0) {
       if (Array.isArray(taskList)) {
         taskList.forEach((element) => {
@@ -59,7 +58,6 @@ const displayController = () => {
       }
     }
   }
-
   const getProjectItems = () => {
     projectListItem = document.querySelectorAll('.sidebar__project')
     return projectListItem
@@ -111,16 +109,29 @@ const displayController = () => {
     const priority = document.createElement('div')
     priority.textContent = `Priority: ${task.priority}`
 
+    const trashDiv = document.createElement('div')
+    trashDiv.classList.add('trash')
+    trashDiv.innerHTML = `<img src="../icons/trash.svg">`
+
     taskLeft.appendChild(inputCheckBox)
     taskLeft.appendChild(taskName)
     taskLeft.appendChild(taskDescription)
     taskRight.appendChild(dueDate)
     taskRight.appendChild(priority)
+    taskRight.appendChild(trashDiv)
 
     taskDiv.appendChild(taskLeft)
     taskDiv.appendChild(taskRight)
 
     taskContainer.appendChild(taskDiv)
+    trashDiv.addEventListener('click', () => {
+      console.log(task)
+      taskDiv.outerHTML = ''
+      let indexToRemove = currentProject.taskList.indexOf(task)
+      currentProject.taskList.splice(indexToRemove, 1)
+      console.log(currentProject)
+      localStorage.setItem('storage', JSON.stringify(storage))
+    })
   }
 
   newTask.addEventListener('click', () => {
@@ -155,7 +166,6 @@ const displayController = () => {
         `${taskPriority}`
       )
       currentProject.taskList.push(newCurrentTask)
-      // console.log(currentProject.taskList)
       loadTasks(currentProject)
       localStorage.setItem('storage', JSON.stringify(storage))
       taskFormContainer.style.display = 'none'
