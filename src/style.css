@@ -1,3 +1,24 @@
+@font-face {
+  font-family: 'Exo';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/exo/v20/4UaZrEtFpBI4f1ZSIK9d4LjJ4rQwCwM.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Nunito Sans';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/nunitosans/v12/pe03MImSLYBIv1o4X1M8cc8WAf5q.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Varela';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/varela/v16/DPEtYwqExx0AWHXJBA.ttf) format('truetype');
+}
 body {
   margin: 0;
   background: black;
@@ -7,6 +28,9 @@ ul {
   list-style-type: none;
   padding: 0;
   margin: 0;
+}
+h1 {
+  font-family: 'Evo', sans-serif;
 }
 header {
   text-align: center;
@@ -28,6 +52,14 @@ footer #new-task:hover {
   transition-property: transform;
   transition-duration: 200ms;
   transform: scale(1.1);
+}
+.taskDescription {
+  color: #a4a4a4;
+}
+#exit_task {
+  position: relative;
+  top: 50px;
+  left: 93%;
 }
 #projectTitle {
   padding: 2%;
@@ -80,6 +112,7 @@ footer #new-task:hover {
   max-width: 240px;
 }
 .task-form-container .task-form h2 {
+  font-family: 'Nunito Sans', sans-serif;
   font-size: 2.4rem;
   grid-row: 1;
   grid-column-start: 1;
@@ -124,6 +157,7 @@ footer #new-task:hover {
 .grid-content .task-container {
   width: 90%;
   margin-inline: 2rem;
+  font-family: 'Vorela', sans-serif;
 }
 .grid-content .task-container .task-div {
   display: flex;
@@ -136,6 +170,9 @@ footer #new-task:hover {
   display: flex;
   gap: 1.5rem;
 }
+.grid-content .task-container .task-div .task-left .taskName {
+  min-width: 15%;
+}
 .grid-content .task-container .task-div .task-right {
   display: flex;
   gap: 1.5rem;
@@ -146,6 +183,7 @@ footer #new-task:hover {
 .grid-sidebar {
   background-color: #222222;
   font-size: 1.15rem;
+  font-family: 'Nunito Sans', sans-serif;
 }
 .grid-sidebar .project-options {
   border-top: 3px solid white;

@@ -15,6 +15,7 @@ const displayController = () => {
   let taskForm = document.querySelector('.task-form')
   const submit = document.querySelector('#submit')
   const createProject = document.querySelector('#new-project')
+  const exitTask = document.getElementById('exit_task')
 
   // functions
   const setProjectTitle = (value) => {
@@ -49,12 +50,9 @@ const displayController = () => {
     
 
     if (project.taskList.length !== 0) {
-      console.log('tasks')
-      console.log(taskList)
       if (Array.isArray(taskList)) {
         taskList.forEach((element) => {
           populateTaskHTMLData(element)
-          console.log(element)
         })
       } else {
         populateTaskHTMLData(taskList)
@@ -96,6 +94,11 @@ const displayController = () => {
 
     const taskName = document.createElement('div')
     taskName.textContent = task.name
+    taskName.classList.add('taskName')
+
+    const taskDescription = document.createElement('div')
+    taskDescription.classList.add('taskDescription')
+    taskDescription.textContent = task.description
 
     if (task.status === 'complete') {
       taskDiv.classList.add('complete')
@@ -110,6 +113,7 @@ const displayController = () => {
 
     taskLeft.appendChild(inputCheckBox)
     taskLeft.appendChild(taskName)
+    taskLeft.appendChild(taskDescription)
     taskRight.appendChild(dueDate)
     taskRight.appendChild(priority)
 
@@ -159,6 +163,11 @@ const displayController = () => {
     } catch (error) {
       console.log(error)
     }
+  })
+
+  exitTask.addEventListener('click', () => {
+    taskFormContainer.style.display = 'none'
+    taskForm.reset()
   })
 
   createProject.addEventListener('click', () => {

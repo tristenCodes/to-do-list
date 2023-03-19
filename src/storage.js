@@ -11,9 +11,5 @@ export function getStorage() {
 export function addToStorage(projectObject) {
 
   storage.push(projectObject)
-  // taskStorage.push(projectObject.taskList)
-  // localStorage.setItem('taskStorage', JSON.stringify(taskStorage))
   localStorage.setItem('storage', JSON.stringify(storage))
-  console.log(JSON.parse(localStorage.getItem('storage')))
-
 }
