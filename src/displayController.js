@@ -1,5 +1,5 @@
 import project from './projects'
-import { addToStorage, storage } from './storage'
+import { addToStorage, removeFromStorage, storage } from './storage'
 import task from './tasks'
 const { add, format } = require('date-fns')
 
@@ -29,6 +29,14 @@ const displayController = () => {
     listItem.classList.add('sidebar__project')
     listItem.textContent = `${project.projectName}`
 
+    let deleteIcon = document.createElement('div')
+    deleteIcon.innerHTML = '<img src="../icons/x.svg">' 
+    deleteIcon.addEventListener('click', () => {
+      listItem.outerHTML = ''
+     removeFromStorage(project)
+    })
+
+
     addToStorage(project)
 
     listItem.addEventListener('click', () => {
@@ -41,13 +49,15 @@ const displayController = () => {
         taskContainer.innerHTML = ''
       }
     })
+    
+    listItem.appendChild(deleteIcon)
     sideBar.appendChild(listItem)
   }
 
   const loadTasks = (project) => {
     taskContainer.innerHTML = ''
     let taskList = project.taskList
-
+    currentProject = project
     if (project.taskList.length !== 0) {
       if (Array.isArray(taskList)) {
         taskList.forEach((element) => {
@@ -113,11 +123,30 @@ const displayController = () => {
     trashDiv.classList.add('trash')
     trashDiv.innerHTML = `<img src="../icons/trash.svg">`
 
+    let editIcon = document.createElement('div')
+    editIcon.classList.add('edit')
+    editIcon.innerHTML = '<img src="../icons/edit.svg">' 
+
+    editIcon.addEventListener('click', () => {
+    taskFormContainer = document.querySelector('.task-form-container')
+    taskFormContainer.style.display = 'block'
+
+      document.getElementById('task-name').value = task.name
+      document.getElementById('task-description').value = task.description
+      document.getElementById('task-priority').value = task.priority
+
+      taskDiv.outerHTML = ''
+      let indexToRemove = currentProject.taskList.indexOf(task)
+      currentProject.taskList.splice(indexToRemove, 1)
+      localStorage.setItem('storage', JSON.stringify(storage))
+    })
+
     taskLeft.appendChild(inputCheckBox)
     taskLeft.appendChild(taskName)
     taskLeft.appendChild(taskDescription)
     taskRight.appendChild(dueDate)
     taskRight.appendChild(priority)
+    taskRight.appendChild(editIcon)
     taskRight.appendChild(trashDiv)
 
     taskDiv.appendChild(taskLeft)
@@ -129,7 +158,6 @@ const displayController = () => {
       taskDiv.outerHTML = ''
       let indexToRemove = currentProject.taskList.indexOf(task)
       currentProject.taskList.splice(indexToRemove, 1)
-      console.log(currentProject)
       localStorage.setItem('storage', JSON.stringify(storage))
     })
   }
@@ -192,6 +220,8 @@ const displayController = () => {
     } else {
       const newProj = project(newProjName)
       addToSideBar(newProj)
+      loadTasks(newProj)
+      setProjectTitle(newProj.projectName)
     }
   })
 

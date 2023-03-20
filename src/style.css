@@ -30,22 +30,28 @@ ul {
   margin: 0;
 }
 h1 {
-  font-family: 'Evo', sans-serif;
+  font-family: 'Vorela', sans-serif;
 }
 header {
-  text-align: center;
   grid-area: 1 / 1 / 2 / 3;
   background-color: #870101;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+header h1 {
+  font-size: 30px;
+  margin: 0;
 }
 footer {
   display: flex;
   align-items: center;
-  background-color: #2b2b2b;
   position: absolute;
   bottom: 0;
   height: 3%;
   width: 84%;
   padding-left: 1%;
+  font-size: 1.2rem;
 }
 footer #new-task:hover {
   cursor: pointer;
@@ -55,6 +61,8 @@ footer #new-task:hover {
 }
 .taskDescription {
   color: #a4a4a4;
+  max-height: 20px;
+  overflow: scroll;
 }
 #exit_task {
   position: relative;
@@ -193,6 +201,7 @@ footer #new-task:hover {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
 }
 .grid-sidebar .project-options > *:hover {
   cursor: pointer;
@@ -206,13 +215,15 @@ footer #new-task:hover {
   padding-bottom: 10%;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
   margin: 0;
   list-style-type: none;
 }
 .grid-sidebar .sidebar-projectList li {
+  display: flex;
   margin-block: 10px;
+  justify-content: space-between;
+  padding-inline: 20px;
 }
 .grid-sidebar .sidebar-projectList li:hover {
   cursor: pointer;

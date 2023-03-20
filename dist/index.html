@@ -9,27 +9,30 @@
     <title>To Do List</title>
   </head>
   <body>
-
     <div class="task-form-container">
-      <img src="../icons/x.svg" alt="exit button" id="exit_task">
-      <form class='task-form'>
-
+      <img src="../icons/x.svg" alt="exit button" id="exit_task" />
+      <form class="task-form">
         <h2>Create a Task</h2>
 
         <div class="task-name-div">
           <label for="task-name">Task Name</label>
-          <input type="text" name="task-name" id="task-name" required>
+          <input type="text" name="task-name" id="task-name" required />
         </div>
 
-        
         <div class="task-duedate-div">
           <label for="task-duedate">Due Date</label>
-          <input type="date" name="task-duedate" id="task-duedate" required>
+          <input type="date" name="task-duedate" id="task-duedate" required />
         </div>
-        
+
         <div class="task-description-div">
           <label for="task-description">Task Description</label>
-          <textarea name="task-description" id="task-description" cols="30" rows="5" required></textarea>
+          <textarea
+            name="task-description"
+            id="task-description"
+            cols="30"
+            rows="5"
+            required
+          ></textarea>
         </div>
 
         <div class="task-priority-div">
@@ -43,24 +46,21 @@
         </div>
 
         <div class="task-submit-div">
-          <button id='submit'>Submit</button>
+          <button id="submit">Submit</button>
         </div>
-
       </form>
     </div>
 
     <div id="grid-container">
-      <header>icons will go here</header>
+      <header>
+        <h1 id="main-header">To-Do List</h1>
+      </header>
 
       <div class="grid-content">
         <h1 id="projectTitle">Null</h1>
-        <div class="task-container">
-
-          
-
-        </div>
+        <div class="task-container"></div>
         <footer>
-          <span id='new-task'>new task</span>
+          <img id="new-task" src="../icons/plus-square.svg" />
         </footer>
       </div>
 

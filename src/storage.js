@@ -13,3 +13,9 @@ export function addToStorage(projectObject) {
   storage.push(projectObject)
   localStorage.setItem('storage', JSON.stringify(storage))
 }
+
+export function removeFromStorage(projectObject) {
+  let indexOfProject = storage.indexOf(projectObject)
+  storage.splice(indexOfProject, 1)
+  localStorage.setItem('storage', JSON.stringify(storage))
+}
