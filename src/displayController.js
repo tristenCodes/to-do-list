@@ -30,7 +30,7 @@ const displayController = () => {
     listItem.textContent = `${project.projectName}`
 
     let deleteIcon = document.createElement('div')
-    deleteIcon.innerHTML = '<img src="../icons/x.svg">' 
+    deleteIcon.innerHTML = '<img src="icons/x.svg">' 
     deleteIcon.addEventListener('click', () => {
       listItem.outerHTML = ''
      removeFromStorage(project)
@@ -121,11 +121,11 @@ const displayController = () => {
 
     const trashDiv = document.createElement('div')
     trashDiv.classList.add('trash')
-    trashDiv.innerHTML = `<img src="../icons/trash.svg">`
+    trashDiv.innerHTML = `<img src="icons/trash.svg">`
 
     let editIcon = document.createElement('div')
     editIcon.classList.add('edit')
-    editIcon.innerHTML = '<img src="../icons/edit.svg">' 
+    editIcon.innerHTML = '<img src="icons/edit.svg">' 
 
     editIcon.addEventListener('click', () => {
     taskFormContainer = document.querySelector('.task-form-container')
